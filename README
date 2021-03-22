@@ -28,6 +28,7 @@ More attributes could be added to the POJO classes .
 Unique identifiers can be added to each request which will help in identifying the logs for a particular API call.
 MYSQL/Oracle database could be used for better scalability.
 Error messages can be moved to property files.
+Test cases can be written .
 
 Create Category JSON :
 e.g. : POST : http://localhost:8080/category/
