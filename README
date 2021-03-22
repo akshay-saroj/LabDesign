@@ -1,0 +1,64 @@
+Solution : The application is completely deployable and testable without the need of any external app/software.
+
+The solutions helps you create category of lab equipments and add items to it.
+
+Category has following Attributes :
+1. Id : unique identifier for a category.
+2. Name(mandatory) : Name of the category 
+3. minweight(grams) : Minimum weight of the item in category (if category is on the basis of weight of the item).
+4. maxWeight(grams) : Maximum weight of the item in category (if category is on the basis of weight of the item).
+5. Description : Descption of the category in free text.
+6. Material : Material/Composition of the item in category , Material of type Others must contain description field value.
+   valid material values (GW("Glass"), C("Chemical"), A("Analytical"), E("Electronic"), D("Paper"), G("Gaseous"), O("Others"))
+7. Size : Size of the item in category (if category is on the basis of size).
+
+Item has following attributes :
+1. id , name , description , material , size is same as above.
+2. Material/Size (if present in category) should be same as category.
+3. weight should be between minweight and maxWeight of category
+
+Exception Handling is done at the global level in class ControllerAdvisor.java .
+Spring basic security is provided with class SecurityConfig.java
+Performance logging is done with class LoggingAspect.class
+It uses an H2 in-memory database
+
+Points for further enhancements :
+Spring OAUth can be used to do Token based authentication .
+More attributes could be added to the POJO classes .
+Unique identifiers can be added to each request which will help in identifying the logs for a particular API call.
+MYSQL/Oracle database could be used for better scalability.
+Error messages can be moved to property files.
+
+Create Category JSON :
+e.g. : POST : http://localhost:8080/category/
+{
+    "name":"category 1",
+    "minWeight": 40,
+    "maxWeight": 140,
+    "description": "Large Beakers",
+    "size" : "LARGE",
+    "material": "GW"
+}
+
+create Item for category :
+e.g. : POST : http://localhost:8080/category/1/item
+{
+    "name":"item 1",
+    "weight" : 50,
+    "description": "beaker with elongated neck",
+    "size" : "LARGE",
+    "material": "GW"
+}
+
+update item for category :
+e.g. : PATCH : http://localhost:8080/category/2/item/
+{
+    "id": 1,
+    "name":"updated item"
+}
+
+retrieve items for category:
+e.g. : GET : http://localhost:8080/category/1
+
+retrieve all categories :
+e.g. : GET : http://localhost:8080/category/
